@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2e3be76c.chunk.css",
+    "main.js": "/static/js/main.1713c67b.chunk.js",
+    "main.js.map": "/static/js/main.1713c67b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ee917276.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ee917276.js.map",
+    "static/js/2.08f5113c.chunk.js": "/static/js/2.08f5113c.chunk.js",
+    "static/js/2.08f5113c.chunk.js.map": "/static/js/2.08f5113c.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.2e3be76c.chunk.css.map": "/static/css/main.2e3be76c.chunk.css.map",
+    "static/js/2.08f5113c.chunk.js.LICENSE.txt": "/static/js/2.08f5113c.chunk.js.LICENSE.txt",
+    "static/media/americanexpress.a1d716b0.png": "/static/media/americanexpress.a1d716b0.png",
+    "static/media/dinersclub.804e5400.jpg": "/static/media/dinersclub.804e5400.jpg",
+    "static/media/elo.3d205664.png": "/static/media/elo.3d205664.png",
+    "static/media/mir.f5165e20.png": "/static/media/mir.f5165e20.png",
+    "static/media/visa.a05453b4.png": "/static/media/visa.a05453b4.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ee917276.js",
+    "static/js/2.08f5113c.chunk.js",
+    "static/css/main.2e3be76c.chunk.css",
+    "static/js/main.1713c67b.chunk.js"
+  ]
+}
