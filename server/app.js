@@ -2,7 +2,7 @@ import express from "express";
 
 const app = express();
 app.use("/", (req, res) => {
-  res.json({ message: 'server is running' });
+  res.json({ message: 'server is running..' });
 });
 
 const PORT = 5051;
