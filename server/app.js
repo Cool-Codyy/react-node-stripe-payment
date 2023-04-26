@@ -4,7 +4,7 @@ const cors = require("cors");
 const app = express();
 const stripe = require("stripe")(require("./config.json").stripeSecretKey);
 
-app.use(express.json());
+app.use(express.json({ extended: false }));
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -151,8 +151,5 @@ function attachMethod({ paymentMethod, customerId }) {
 
 /* -------------------------------------------------------------- */
 
-app.listen(5051, (err) => {
-  if (err) throw err;
-
-  console.log("Server running");
-});
+const PORT = process.env.PORT || 5051;
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
