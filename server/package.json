@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "cors": "^2.8.5",
+    "nodemon": "^2.0.15",
+    "stripe": "^8.191.0"
   }
 }
