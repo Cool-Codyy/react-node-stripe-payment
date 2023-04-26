@@ -10,6 +10,7 @@
       position: relative;
       width: 500px;
       margin-bottom: 20px;
+      background-color: #fff;
 
       .icon {
         img {
@@ -43,6 +44,17 @@
       }
     }
   }
+
+    button {
+      cursor: pointer;
+      background-color: #3166ec;
+      width: 150px;
+      border: none;
+      height: 40px;
+      color: white;
+      border-radius: 5px;
+      font-weight: 500;
+    }
 }
 
 .cvcError {

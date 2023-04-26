@@ -111,7 +111,9 @@ export default function PaymentForm({ paymentMethod, paymentIntent }) {
             </div>
           </div>
 
-          <button>Make Payment</button>
+          <div className={style.btnContainer}>
+                <button className={style.btnContainer}>Make Payment</button>
+              </div>
         </form>
       </div>
     )
