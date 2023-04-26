@@ -27,7 +27,7 @@ app.post("/payment/method/attach", async (req, res) => {
   const { paymentMethod } = req.body;
 
   /* Fetch the Customer Id of current logged in user from the database */
-  const customerId = "cus_NmcDB8SIgcyff0";
+  const customerId = "cus_NmgRJUsOlJYHpS";
 
   try {
     const method = await attachMethod({ paymentMethod, customerId });
@@ -43,7 +43,7 @@ app.post("/payment/method/attach", async (req, res) => {
 
 app.get("/payment/methods", async (req, res) => {
   /* Query database to fetch Stripe Customer Id of current logged in user */
-  const customerId = "cus_NmcDB8SIgcyff0";
+  const customerId = "cus_NmgRJUsOlJYHpS";
 
   try {
     const paymentMethods = await listCustomerPayMethods(customerId);
@@ -57,13 +57,12 @@ app.get("/payment/methods", async (req, res) => {
 /* ---------------------------------------------------------------------- */
 
 app.post("/payment/create", async (req, res) => {
-  const { paymentMethod } = req.body;
+  const { paymentMethod, amount } = req.body;
 
   /* Query database for getting the payment amount and customer id of the current logged in user */
 
-  const amount = 1;
   const currency = "INR";
-  const userCustomerId = "cus_NmcDB8SIgcyff0";
+  const userCustomerId = "cus_NmgRJUsOlJYHpS";
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({

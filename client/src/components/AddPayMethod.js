@@ -19,11 +19,18 @@ export default function AddPayMethod() {
     name: "",
     expiry: "",
     number: "",
+    email: "",
     address: {
       line: "",
       postalCode: "",
     },
   });
+
+  const [validate, setValidate] = useState({
+    emailError: "",
+    nameError: ""
+  });
+
 
   const [locations, setLocations] = useState({ countries: "", states: "", cities: "" });
   const [selectedLocation, setSelectedLocation] = useState({ country: {}, city: {}, state: {} });
@@ -46,6 +53,13 @@ export default function AddPayMethod() {
     const { value } = e.target;
     setCardInfo((prev) => {
       return { ...prev, name: value };
+    });
+  }
+
+  function handleChangeEmail(e) {
+    const { value } = e.target;
+    setCardInfo((prev) => {
+      return { ...prev, email: value };
     });
   }
 
@@ -82,8 +96,28 @@ export default function AddPayMethod() {
 
   async function handleSubmit() {
     const address = cardInfo.address;
+    if(cardInfo.name === '') {
+      setValidate((prev) => {
+        return { ...prev, nameError: 'Please enter the your name!' };
+      });
+      return;
+    } else {
+      setValidate((prev) => {
+        return { ...prev, nameError: '' };
+      });
+    }
+      if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(cardInfo.email)) {
+      setValidate((prev) => {
+        return { ...prev, emailError: 'Please enter the valid email address!' };
+      });
+    } else {
+      setValidate((prev) => {
+        return { ...prev, emailError: ' ' };
+      });
+    }
     const billingDetails = {
       name: cardInfo.name,
+      email: cardInfo.email,
       address: {
         country: address.country,
         state: address.state,
@@ -103,7 +137,8 @@ export default function AddPayMethod() {
           postRequest("/payment/method/attach", { paymentMethod: resp.paymentMethod })
             .then((resp) => {
               /* Handle success */
-              history.push('/make-payment');
+              alert('Payment method added Successfully!!!')
+              history.replace('/make-payment');
             })
             .catch((err) => {
               /*Handle Error */
@@ -135,6 +170,21 @@ export default function AddPayMethod() {
             name="name"
             placeholder="Enter card holder name"
           />
+          {validate.nameError !== '' &&
+            <p className={style.error}>{validate.nameError}</p>
+          }
+        </div>
+        <div className={style.row}>
+          <label>Cardholder Email</label>
+          <input
+            onChange={handleChangeEmail}
+            type="text"
+            name="email"
+            placeholder="Enter card holder Email"
+          />
+          {validate.emailError !== '' &&
+            <p className={style.error}>{validate.emailError}</p>
+          }
         </div>
         <div className={style.rowPaymentInput}>
           <CardElement ref={card} />

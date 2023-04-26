@@ -13,6 +13,8 @@ export default function PaymentScreen() {
     paymentMethods: false,
     paymentForm: false,
   });
+  const [amount, setAmount] = useState(0);
+  const [amountError, setAmountError] = useState('');
 
   function handleSelectCard(method) {
     setSelectedMethod(method);
@@ -20,9 +22,11 @@ export default function PaymentScreen() {
   }
 
   function createPaymentIntent(selectedPaymentMethodId) {
-    postRequest(`/payment/create`, {
+    const data = {
       paymentMethod: selectedPaymentMethodId,
-    })
+      amount,
+    };
+    postRequest(`/payment/create`, {...data})
       .then((resp) => {
         setPaymentIntent(resp.data);
         setActiveScreen({ paymentForm: false, paymentMethods: true });
@@ -39,6 +43,16 @@ export default function PaymentScreen() {
     setActiveScreen(toUpdate);
   }
 
+  function handleChangeAmount(e) {
+    const { value } = e.target;
+    if(!(/^[1-9]*$/).test(value)) {
+      setAmountError('Please enter valid amount');
+    } else {
+      setAmount((prev) => Number(value));  
+      setAmountError('');
+    }
+  }
+
   function handleClickMakePayment() {
     changeActiveScreen("paymentMethods");
   }
@@ -52,11 +66,15 @@ export default function PaymentScreen() {
             <div className={style.row}>
               <label>Amount</label>
               <input
-                // onChange={handleChangeName}
+                onChange={handleChangeAmount}
+                id="amount"
                 type="text"
                 name="name"
                 placeholder="Enter the amount"
               />
+          {amountError !== '' &&
+            <p className={style.error}>{amountError}</p>
+          }
             </div>
             <div className={style.addressWrapper}>
               <div className={style.btnContainer}>

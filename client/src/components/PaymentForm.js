@@ -1,15 +1,15 @@
 import { useState } from "react";
 import style from "./PaymentForm.module.scss";
-
+import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { format } from "date-fns";
 import { useStripe, CardCvcElement, useElements } from "@stripe/react-stripe-js";
-
 import { postRequest } from "../utils/api";
 
 export default function PaymentForm({ paymentMethod, paymentIntent }) {
   const stripe = useStripe();
   const elements = useElements();
+  const history = useHistory();
 
   const [cvcError, setCvcError] = useState(null);
 
@@ -45,12 +45,12 @@ export default function PaymentForm({ paymentMethod, paymentIntent }) {
   function handleServerResponse(response) {
     if (response.error) {
       /* Handle Error */
+      history.replace('/payment-failure');
     } else if (response.next_action) {
       handleAction(response);
     } else {
-      alert("Payment Success");
+      history.replace('/payment-success');
       /* Handle Success */
-      window.location.reload();
     }
   }
 

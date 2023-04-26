@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { getRequest } from "../utils/api";
 import { getCardImage } from "../utils/helpers";
 
-export default function ListPaymentMethods({ handleSelectCard }) {
+export default function ListPaymentMethods({ handleSelectCard, amount }) {
   const [paymentMethods, setPaymentMethods] = useState(null);
 
   function getPaymentMethods() {

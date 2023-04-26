@@ -20,7 +20,7 @@ export default function Register() {
     postRequest("/user/register", formData)
       .then((resp) => {
         console.log(resp);
-        history.push('/add-payment-method');
+        history.replace('/add-payment-method');
       })
       .catch((err) => {
         console.log(err);
