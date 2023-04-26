@@ -148,7 +148,7 @@ function attachMethod({ paymentMethod, customerId }) {
 
 /* -------------------------------------------------------------- */
 
-app.listen('https://react-node-stripe-payment-server-git-main-cool-cody.vercel.app', (err) => {
+app.listen(5051, (err) => {
   if (err) throw err;
 
   console.log("Server running");

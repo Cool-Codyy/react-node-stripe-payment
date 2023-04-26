@@ -1,5 +1,5 @@
 import axios from "axios";
-const _BASE_URL = "https://react-node-stripe-payment-server-git-main-cool-cody.vercel.app";
+const _BASE_URL = "https://react-node-stripe-payment-server.vercel.app:5051";
 
 export const postRequest = (path, data) => {
   return axios.post(`${_BASE_URL}${path}`, data, {
