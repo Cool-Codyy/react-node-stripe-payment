@@ -7,9 +7,6 @@ const stripe = require("stripe")(require("./config.json").stripeSecretKey);
 app.use(express.json({ extended: false }));
 app.use(cors());
 
-app.use("/", (req, res) => {
-  res.send({ message: 'server is running' });
-});
 app.post("/user/register", async (req, res) => {
   const { email, name, password, phone } = req.body;
 
@@ -149,6 +146,9 @@ function attachMethod({ paymentMethod, customerId }) {
   });
 }
 
+app.use("/", (req, res) => {
+  res.send({ message: 'server is running' });
+});
 /* -------------------------------------------------------------- */
 
 const PORT = process.env.PORT || 5051;
