@@ -56,6 +56,18 @@ app.get("/payment/methods", async (req, res) => {
 
 /* ---------------------------------------------------------------------- */
 
+app.get("/payment/alltransaction", async (req, res) => {
+  try {
+    const allTransaction = await listCustomerTransactions();
+    res.status(200).json(allTransaction);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Could not get all transaction");
+  }
+});
+
+/* ---------------------------------------------------------------------- */
+
 app.post("/payment/create", async (req, res) => {
   const { paymentMethod, amount } = req.body;
 
@@ -116,6 +128,19 @@ async function createStripeCustomer({ name, email, phone }) {
     } catch (err) {
       console.log(err);
       reject(err);
+    }
+  });
+}
+
+async function listCustomerTransactions() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const allTransaction = await stripe.issuing.transactions.list({
+        limit: 20,
+      });
+      resolve(allTransaction);
+    } catch (err) {
+      reject(error);
     }
   });
 }
