@@ -57,8 +57,9 @@ app.get("/payment/methods", async (req, res) => {
 /* ---------------------------------------------------------------------- */
 
 app.get("/payment/alltransaction", async (req, res) => {
+  const customerId = "cus_NmgRJUsOlJYHpS";
   try {
-    const allTransaction = await listCustomerTransactions();
+    const allTransaction = await listCustomerTransactions(customerId);
     res.status(200).json(allTransaction);
   } catch (err) {
     console.log(err);
@@ -132,15 +133,16 @@ async function createStripeCustomer({ name, email, phone }) {
   });
 }
 
-async function listCustomerTransactions() {
+async function listCustomerTransactions(customerId) {
   return new Promise(async (resolve, reject) => {
     try {
-      const allTransaction = await stripe.issuing.transactions.list({
-        limit: 20,
+      const allTransaction =  await stripe.paymentIntents.list({
+        customer: customerId,
+        limit: 10,
       });
       resolve(allTransaction);
     } catch (err) {
-      reject(error);
+      reject(err);
     }
   });
 }
